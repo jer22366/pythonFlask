@@ -21,6 +21,7 @@ class User(db.Model):
     deleted_at = db.Column(db.DateTime, nullable=True)
     is_active = db.Column(db.Boolean, default=True)
     level = db.Column(db.Enum(LevelEnum), nullable=False, default=LevelEnum.staff)
+    
     def __repr__(self):
         return f'<User {self.username}>'
     

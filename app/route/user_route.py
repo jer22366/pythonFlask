@@ -7,6 +7,7 @@ from app.Services.UserService.updateUserById import update_user_by_id_logic
 from app.Services.UserService.getUserChart import get_user_chart_logic
 from app.Services.UserService.isActive import is_active_logic
 from app.Services.UserService.deleteUser import delete_user_logic
+from app.Services.UserService.resetPassword import reset_password_logic
 # from app.Services.UserService.ecPay import ecpay_logic
 # from app.Services.UserService.ecPayNotify import ecpay_notify_logic
 from app.database.table.users.models import db, User
@@ -80,6 +81,10 @@ def update_user_by_id(id):
 @user_bp.route('/delete/<int:id>',methods=['DELETE'])
 def delete_user(id):
     return delete_user_logic(id)
+
+@user_bp.route('/resetPassword/<int:id>',methods=['PUT'])
+def reset_password(id):
+    return reset_password_logic(id)
 
 @user_bp.route('/isActive/<int:id>',methods=['PUT'])
 def is_active(id):
