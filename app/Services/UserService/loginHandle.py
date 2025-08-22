@@ -25,7 +25,7 @@ def loginLogic():
 
     # 檢查level權限
     if user.level.name == 'admin':
-        dashboard_url = '/dashboard'
+        dashboard_url = '/pages/dashboard'
     else:
         dashboard_url = '/payment'
     return jsonify({

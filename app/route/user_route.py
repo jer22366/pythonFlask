@@ -3,6 +3,8 @@ from app.Services.UserService.loginHandle import loginLogic
 from app.Services.UserService.registerHandler import registerLogic
 from app.Services.UserService.getUserById import get_user_by_id_logic
 from app.Services.UserService.getUser import get_user_logic
+from app.Services.UserService.getDeleteUser import get_deleted_user_logic
+from app.Services.UserService.restoreUser import restore_user_logic
 from app.Services.UserService.updateUserById import update_user_by_id_logic
 from app.Services.UserService.getUserChart import get_user_chart_logic
 from app.Services.UserService.isActive import is_active_logic
@@ -74,6 +76,14 @@ def get_user():
 def get_user_by_id(id):  
     return get_user_by_id_logic(id)
 
+@user_bp.route("/getDeletedUser", methods=["GET"])
+def get_deleted_user():
+    return get_deleted_user_logic()
+
+@user_bp.route('/restore/<int:id>', methods=['PUT'])
+def restore_user(id):
+    return restore_user_logic(id)
+
 @user_bp.route('/update/<int:id>', methods=['POST'])
 def update_user_by_id(id):
     return update_user_by_id_logic(id)
@@ -81,6 +91,7 @@ def update_user_by_id(id):
 @user_bp.route('/delete/<int:id>',methods=['DELETE'])
 def delete_user(id):
     return delete_user_logic(id)
+
 
 @user_bp.route('/resetPassword/<int:id>',methods=['PUT'])
 def reset_password(id):
