@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify
 from app.database.table.users.models import db, User
 
-def delete_user_logic(user_id):
-    user = User.query.filter_by(id=user_id, deleted_at=None).first()
+def delete_user_logic(id):
+    user = User.query.filter_by(user_id=id, deleted_at=None).first()
     if not user:
         return jsonify({"error": "用戶不存在或已刪除"}), 404
 
