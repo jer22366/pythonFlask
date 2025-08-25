@@ -15,6 +15,7 @@ from app.Services.UserService.resetPassword import reset_password_logic
 from app.database.table.users.models import db, User
 from flask_migrate import Migrate
 from datetime import datetime, date
+from app.Services.authService.auth import jwt_required
 import requests 
 
 user_bp = Blueprint('user', __name__, url_prefix='/api/user')
@@ -69,35 +70,43 @@ def register_handler():
     return registerLogic()
 
 @user_bp.route("/getUser", methods=["GET"])
+@jwt_required
 def get_user():
  return get_user_logic()
 
 @user_bp.route("/getUser/<int:id>", methods=["GET"])
+@jwt_required
 def get_user_by_id(id):  
     return get_user_by_id_logic(id)
 
 @user_bp.route("/getDeletedUser", methods=["GET"])
+@jwt_required
 def get_deleted_user():
     return get_deleted_user_logic()
 
 @user_bp.route('/restore/<int:id>', methods=['PUT'])
+@jwt_required
 def restore_user(id):
     return restore_user_logic(id)
 
 @user_bp.route('/update/<int:id>', methods=['POST'])
+@jwt_required
 def update_user_by_id(id):
     return update_user_by_id_logic(id)
 
 @user_bp.route('/delete/<int:id>',methods=['DELETE'])
+@jwt_required
 def delete_user(id):
     return delete_user_logic(id)
 
 
 @user_bp.route('/resetPassword/<int:id>',methods=['PUT'])
+@jwt_required
 def reset_password(id):
     return reset_password_logic(id)
 
 @user_bp.route('/isActive/<int:id>',methods=['PUT'])
+@jwt_required
 def is_active(id):
     return is_active_logic(id)
 

@@ -1,7 +1,10 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from app.database.table.users.models import User
 from app.database.table.loginLog.models import loginLog, db
 from werkzeug.security import check_password_hash
+import jwt
+import datetime
+from app.config import Config 
 
 def loginLogic():
     data = request.get_json()
@@ -23,22 +26,27 @@ def loginLogic():
     db.session.add(log)
     db.session.commit()
 
-    # 檢查level權限
+    # 檢查 level 權限
     if user.level.name == 'admin':
         dashboard_url = '/pages/dashboard'
     else:
         dashboard_url = '/payment'
-    return jsonify({
-        "message": "Login successful",
+
+    token = jwt.encode(
+        {"user_id": user.id, "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=2)},
+        "你的JWT_SECRET",
+        algorithm="HS256"
+    )
+
+    resp = make_response(jsonify({
         "status": "success",
-        "dashboard_url": dashboard_url,
-        "user_level":  user.level.name,
-        "ip": ip
-    }), 200
+        "dashboard_url": dashboard_url
+    }))
+    resp.set_cookie("jwt", token, httponly=True, samesite="Lax")
+    return resp
 
 def get_client_ip():
     if request.headers.getlist("X-Forwarded-For"):
-        # 可能有多個 IP，取第一個才是真實 IP
         ip = request.headers.getlist("X-Forwarded-For")[0].split(',')[0]
     else:
         ip = request.remote_addr
