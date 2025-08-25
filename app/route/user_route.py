@@ -1,12 +1,17 @@
 from flask import Flask, redirect, Blueprint
-from app.Services.UserService.loginHandle import loginLogic 
+from app.Services.UserService.loginHandle import loginLogic
+from app.Services.UserService.logoutHandle import logoutLogic 
 from app.Services.UserService.registerHandler import registerLogic
 from app.Services.UserService.getUserById import get_user_by_id_logic
 from app.Services.UserService.getUser import get_user_logic
 from app.Services.UserService.getDeleteUser import get_deleted_user_logic
 from app.Services.UserService.restoreUser import restore_user_logic
 from app.Services.UserService.updateUserById import update_user_by_id_logic
-from app.Services.UserService.getUserChart import get_user_chart_logic
+from app.Services.UserService.jsChart.getStats import get_user_stats_logic
+from app.Services.UserService.jsChart.getUserChart import get_user_chart_logic
+from app.Services.UserService.jsChart.getUsercircleChart import get_circle_chart_logic
+from app.Services.UserService.jsChart.getRoleDistribution import get_role_distribution_logic
+
 from app.Services.UserService.isActive import is_active_logic
 from app.Services.UserService.deleteUser import delete_user_logic
 from app.Services.UserService.resetPassword import reset_password_logic
@@ -65,6 +70,10 @@ def create_user():
 def login_handler():
     return loginLogic()
 
+@user_bp.route("/logout", methods=["POST","GET"])
+def logout_handler():
+    return logoutLogic()
+
 @user_bp.route("/register", methods=["POST"])
 def register_handler():
     return registerLogic()
@@ -110,9 +119,21 @@ def reset_password(id):
 def is_active(id):
     return is_active_logic(id)
 
+@user_bp.route('/getStats', methods=['GET'])
+def get_user_stats():
+    return get_user_stats_logic()
+
 @user_bp.route('/getUserChart', methods=['GET'])
 def get_user_chart():
     return get_user_chart_logic()
+
+@user_bp.route('/getCircleChartStats', methods=['GET'])
+def get_circle_chart():
+    return get_circle_chart_logic()
+
+@user_bp.route('/getRoleDistribution', methods=['GET'])
+def get_role_distribution():
+    return get_role_distribution_logic()
 
 # @main_bp.route("/api/ecPay", methods=["POST"])
 # def ecPay():

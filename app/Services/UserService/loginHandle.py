@@ -1,6 +1,6 @@
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify
 from app.database.table.users.models import User
-from app.database.table.loginLog.models import loginLog, db
+from app.database.table.userActiveLog.models import UserActiveLog, db
 from werkzeug.security import check_password_hash
 import jwt
 import datetime
@@ -22,7 +22,7 @@ def loginLogic():
     ip = get_client_ip()
     user_agent = request.headers.get('User-Agent')
 
-    log = loginLog(user_id=user.id, ip=ip, user_agent=user_agent)
+    log = UserActiveLog(user_id=user.id, ip=ip, user_agent=user_agent, action='login')
     db.session.add(log)
     db.session.commit()
 
@@ -32,18 +32,24 @@ def loginLogic():
     else:
         dashboard_url = '/payment'
 
-    token = jwt.encode(
-        {"user_id": user.id, "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=2)},
-        "你的JWT_SECRET",
-        algorithm="HS256"
-    )
+    # ✅ 產生 JWT token
+    token_payload = {
+        "user_id": user.id,
+        "username": user.username,
+        "level": user.level.name,
+        "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=2)  # 2 小時過期
+    }
+    token = jwt.encode(token_payload, Config.SECRET_KEY, algorithm="HS256")
 
-    resp = make_response(jsonify({
+    return jsonify({
+        "message": "Login successful",
         "status": "success",
-        "dashboard_url": dashboard_url
-    }))
-    resp.set_cookie("jwt", token, httponly=True, samesite="Lax")
-    return resp
+        "dashboard_url": dashboard_url,
+        "user_level": user.level.name,
+        "ip": ip,
+        "token": token  # 回傳 JWT
+    }), 200
+
 
 def get_client_ip():
     if request.headers.getlist("X-Forwarded-For"):
