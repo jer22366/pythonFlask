@@ -27,5 +27,17 @@ class Position(db.Model):
     # 關聯：每個 Position 屬於一個 Department
     department = db.relationship("Department", back_populates="positions")
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "code": self.code,
+            "level": self.level,
+            "department_id": self.department_id,
+            "status": self.status.value if self.status else None,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at
+        }
+        
     def __repr__(self):
         return f"<Position {self.name}>"
