@@ -26,12 +26,6 @@ def loginLogic():
     db.session.add(log)
     db.session.commit()
 
-    # 檢查 level 權限
-    if user.level.name == 'admin':
-        dashboard_url = '/pages/dashboard'
-    else:
-        dashboard_url = '/payment'
-
     # ✅ 產生 JWT token
     token_payload = {
         "user_id": user.id,
@@ -44,7 +38,7 @@ def loginLogic():
     return jsonify({
         "message": "Login successful",
         "status": "success",
-        "dashboard_url": dashboard_url,
+        "dashboard_url": "/pages/dashboard",
         "user_level": user.level.name,
         "ip": ip,
         "token": token  # 回傳 JWT

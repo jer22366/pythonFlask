@@ -1,8 +1,7 @@
 from app import db
-from datetime import datetime
 
 class UserActiveLog(db.Model):
-    __tablename__ = 'UserActive_logs'
+    __tablename__ = 'useractive_logs'
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
