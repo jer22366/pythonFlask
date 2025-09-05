@@ -1,8 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
-db = SQLAlchemy()
-
+from extensions import db
 class CompanyInfo(db.Model):
     __tablename__ = 'company_info'
 
@@ -26,8 +24,8 @@ class CompanyInfo(db.Model):
     language = db.Column(db.String(50), nullable=True)        # 系統語系
 
     # 系統欄位
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
 
     def __repr__(self):
         return f"<CompanyInfo {self.name}>"

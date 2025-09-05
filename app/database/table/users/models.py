@@ -1,4 +1,4 @@
-from app import db
+from extensions import db
 from datetime import datetime
 import enum
 class LevelEnum(enum.Enum):
@@ -10,7 +10,7 @@ class LevelEnum(enum.Enum):
 class User(db.Model):
     __tablename__ = 'users'  # 明確指定表名
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.BigInteger, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     birthday = db.Column(db.Date, nullable=True)

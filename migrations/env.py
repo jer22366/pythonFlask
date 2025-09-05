@@ -5,6 +5,11 @@ from flask import current_app
 from app.database.table.department import models
 from app.database.table.positions import models
 from app.database.table.companyInfo import models
+from app.database.table.leaveType import models
+from app.database.table.reportSetting import models
+from app.database.table.notify import models
+from app.database.table.role import models
+from app.database.table.users import models
 
 from alembic import context
 

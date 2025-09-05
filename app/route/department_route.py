@@ -1,4 +1,4 @@
-from flask import Flask, redirect, Blueprint
+from flask import Blueprint
 from app.Services.DepartmentService.createDepartment import create_department_logic
 from app.Services.DepartmentService.getDepartment import get_department_logic
 from app.Services.DepartmentService.getDepartmentById import get_department_by_id_logic

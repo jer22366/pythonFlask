@@ -1,4 +1,4 @@
-from flask import Flask, redirect, Blueprint
+from flask import Blueprint
 from app.Services.PositionService.createPosition import create_position_logic
 from app.Services.PositionService.getPosition import get_position_logic
 from app.Services.PositionService.getPositionById import get_position_by_id_logic

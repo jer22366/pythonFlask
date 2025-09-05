@@ -1,10 +1,6 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-
-
-db = SQLAlchemy()
-migrate = Migrate()
+from extensions import db, migrate
+from app.route import blueprints
 
 def create_app():
     app = Flask(__name__)
@@ -13,11 +9,7 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
-    from .route.user_route import user_bp
-    from .route.department_route import organ_bp
-    from .route.position_route import position_bp
-    
-    app.register_blueprint(user_bp)
-    app.register_blueprint(organ_bp)
-    app.register_blueprint(position_bp)
+    for bp in blueprints:
+        app.register_blueprint(bp)
+
     return app

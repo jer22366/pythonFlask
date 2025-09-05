@@ -1,9 +1,9 @@
-from app import db
+from extensions import db
 
 class UserActiveLog(db.Model):
     __tablename__ = 'useractive_logs'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.BigInteger, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     ip = db.Column(db.String(45), nullable=False)  # 支援 IPv6
     user_agent = db.Column(db.String(255), nullable=True)
