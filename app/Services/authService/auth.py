@@ -15,7 +15,7 @@ def jwt_required(f):
         try:
             payload = jwt.decode(token, Config.SECRET_KEY, algorithms=["HS256"])
             # 可以把 payload 放到 request 物件中方便後續使用
-            request.user = payload
+            request.useㄐ = payload
         except jwt.ExpiredSignatureError:
             return jsonify({"status": "error", "message": "Token expired"}), 401
         except jwt.InvalidTokenError:

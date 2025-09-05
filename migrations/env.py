@@ -10,7 +10,7 @@ from app.database.table.reportSetting import models
 from app.database.table.notify import models
 from app.database.table.role import models
 from app.database.table.users import models
-
+from app.database.table.employeePayroll import models
 from alembic import context
 
 # this is the Alembic Config object, which provides

@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-from app.Services.reportSettingService.reportSchedulesService import (
+from app.Services.ReportSettingService.reportSchedulesService import (
     create_schedule_logic,
     list_schedules_logic,
     get_schedule_logic,

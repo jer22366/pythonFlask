@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import request, jsonify
 from app.database.table.reportSetting.models import db, ReportField
 
 def create_field_logic():

@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.Services.reportSettingService.reportTemplateService import (
+from app.Services.ReportSettingService.reportTemplateService import (
     create_template_logic, 
     list_templates_logic, 
     get_template_logic, 

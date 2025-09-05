@@ -7,6 +7,9 @@ from .report_field_route import field_bp
 from .reportRecipients_route import recipients_bp
 from .reportExportLogs_route import report_export_logs_bp
 from .reportSchedules_route import re_schedules_bp
+from .employee_route import employees_bp
+from .payRolls_route import payRolls_bp
+
 blueprints = [
     user_bp,
     organ_bp,
@@ -16,5 +19,7 @@ blueprints = [
     field_bp,
     recipients_bp,
     report_export_logs_bp,
-    re_schedules_bp
+    re_schedules_bp,
+    payRolls_bp,
+    employees_bp
 ]

@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.Services.reportSettingService.reportRecipientsService import (
+from app.Services.ReportSettingService.reportRecipientsService import (
     create_recipient_logic,
     update_recipient_logic,
     list_recipients_logic,

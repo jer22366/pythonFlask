@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.Services.reportSettingService.reportLogService import (
+from app.Services.ReportSettingService.reportLogService import (
     create_log_logic,
     list_logs_logic,
     update_log_logic,
