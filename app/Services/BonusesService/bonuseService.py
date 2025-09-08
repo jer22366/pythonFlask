@@ -11,7 +11,7 @@ def add_bonus_logic():
     )
     db.session.add(bonus)
     db.session.commit()
-    return jsonify({"message": "Bonus created", "id": bonus.id})
+    return jsonify({"status": "success", "message": "Bonus created", "data": bonus}), 201
 
 def get_bonus_logic():
     bonuses = Bonus.query.all()
@@ -31,10 +31,10 @@ def update_bonus_logic(id):
     bonus.type = data.get('type', bonus.type)
     bonus.amount = data.get('amount', bonus.amount)
     db.session.commit()
-    return jsonify({"message": "Bonus updated"})
+    return jsonify({"status": "success", "message": "Bonus updated", "data": bonus}), 200
 
 def delete_bonus_logic(id):
     bonus = Bonus.query.get_or_404(id)
     db.session.delete(bonus)
     db.session.commit()
-    return jsonify({"message": "Bonus deleted"})
+    return jsonify({"status": "success", "message": "Bonus deleted"}), 200

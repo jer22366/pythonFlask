@@ -16,7 +16,7 @@ def add_payroll_logic():
     payroll.net_salary = payroll.base_salary + payroll.total_allowance + payroll.total_bonus - payroll.total_deduction
     db.session.add(payroll)
     db.session.commit()
-    return jsonify({"message": "Payroll created", "id": payroll.id})
+    return jsonify({"status": "success", "data": payroll}), 201
 
 def get_payrolls_logic():
     payrolls = Payroll.query.all()
@@ -43,11 +43,11 @@ def update_payroll_logic(id):
     payroll.total_deduction = data.get('total_deduction', payroll.total_deduction)
     payroll.net_salary = payroll.base_salary + payroll.total_allowance + payroll.total_bonus - payroll.total_deduction
     db.session.commit()
-    return jsonify({"message": "Payroll updated"})
+    return jsonify({"status": "success", "data": payroll}), 200
 
 
 def delete_payroll_logic(id):
     payroll = Payroll.query.get_or_404(id)
     db.session.delete(payroll)
     db.session.commit()
-    return jsonify({"message": "Payroll deleted"})
+    return jsonify({"status": "success"})

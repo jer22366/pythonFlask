@@ -12,4 +12,4 @@ def create_leave_type_logic():
     )
     db.session.add(leave)
     db.session.commit()
-    return jsonify({"message": "Leave type created", "id": leave.id}), 201
+    return jsonify({"status": "success", "data": leave}), 201

@@ -8,4 +8,4 @@ def delete_leave_type_logic(id):
         return jsonify({"message": "Leave type not found"}), 404
     db.session.delete(leave_type)
     db.session.commit()
-    return jsonify({"message": "Leave type deleted successfully"}), 200
+    return jsonify({"status": "success"}), 200

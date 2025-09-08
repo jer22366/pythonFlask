@@ -11,7 +11,7 @@ def add_allowance_logic():
     )
     db.session.add(allowance)
     db.session.commit()
-    return jsonify({"message": "Allowance created", "id": allowance.id})
+    return jsonify({"status": "success", "message": "Allowance created", "data": allowance}), 201
 
 def get_allowances_logic():
     allowances = Allowance.query.all()
@@ -31,11 +31,11 @@ def update_allowance_logic(id):
     allowance.type = data.get('type', allowance.type)
     allowance.amount = data.get('amount', allowance.amount)
     db.session.commit()
-    return jsonify({"message": "Allowance updated"})
+    return jsonify({"status": "success", "message": "Allowance updated", "data": allowance}), 200
 
 
 def delete_allowance_logic(id):
     allowance = Allowance.query.get_or_404(id)
     db.session.delete(allowance)
     db.session.commit()
-    return jsonify({"message": "Allowance deleted"})
+    return jsonify({"status": "success", "message": "Allowance deleted"}), 200

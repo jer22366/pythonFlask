@@ -13,4 +13,4 @@ def create_position_logic():
         )
         db.session.add(pos)
         db.session.commit()
-        return jsonify({"message": "Position created", "id": pos.id}), 201
+        return jsonify({"status": "success", "data": pos.to_dict()}), 201

@@ -14,9 +14,9 @@ def add_employee_logic():
     )
     db.session.add(emp)
     db.session.commit()
-    return jsonify({"message": "Employee added", "id": emp.id}), 201
-    
-    
+    return jsonify({"status": "success", "data": emp}), 201
+
+
 def list_employees_logic():
     employees = Employee.query.all()
     result = []
@@ -41,13 +41,13 @@ def update_employee_logic(id):
         employee.position = data.get('position', employee.position)
         employee.hire_date = datetime.strptime(data.get('hire_date', employee.hire_date.strftime("%Y-%m-%d")), "%Y-%m-%d")
         db.session.commit()
-        return jsonify({"message": "Employee updated"})
-    return jsonify({"message": "Employee not found"}), 404
+        return jsonify({"status": "success", "data": employee}), 200
+    return jsonify({"status": "error", "message": "Employee not found"}), 404
 
 def delete_employee_logic(id):
     employee = Employee.query.get(id)
     if employee:
         db.session.delete(employee)
         db.session.commit()
-        return jsonify({"message": "Employee deleted"})
-    return jsonify({"message": "Employee not found"}), 404
+        return jsonify({"status": "success"}), 200
+    return jsonify({"status": "error", "message": "Employee not found"}), 404

@@ -10,7 +10,7 @@ def add_deduction_logic():
     )
     db.session.add(deduction)
     db.session.commit()
-    return jsonify({"message": "Deduction created", "id": deduction.id})
+    return jsonify({"status": "success", "message": "Deduction created", "data": deduction}), 201
 
 def get_deductions_logic():
     deductions = Deduction.query.all()
@@ -30,10 +30,10 @@ def update_deduction_logic(id):
     deduction.type = data.get('type', deduction.type)
     deduction.amount = data.get('amount', deduction.amount)
     db.session.commit()
-    return jsonify({"message": "Deduction updated"})
+    return jsonify({"status": "success", "message": "Deduction updated", "data": deduction}), 200
 
 def delete_deduction_logic(id):
     deduction = Deduction.query.get_or_404(id)
     db.session.delete(deduction)
     db.session.commit()
-    return jsonify({"message": "Deduction deleted"})
+    return jsonify({"status": "success", "message": "Deduction deleted"}), 200

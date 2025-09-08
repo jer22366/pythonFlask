@@ -7,7 +7,7 @@ def delete_department_logic(department_id):
     try:
         db.session.delete(department)
         db.session.commit()
-        return jsonify({"message": "部門刪除成功"}), 200
+        return jsonify({"status": "success", "message": "部門刪除成功"}), 200
     except Exception as e:
         db.session.rollback()
-        return jsonify({"error": str(e)}), 400
+        return jsonify({"status": "error", "message": str(e)}), 400

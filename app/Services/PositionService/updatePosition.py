@@ -11,4 +11,4 @@ def update_position_logic(position_id):
         if "department_id" in data: pos.department_id = data["department_id"]
         if "status" in data: pos.status = data["status"]
         db.session.commit()
-        return jsonify({"message": "Position updated"})
+        return jsonify({"status": "success", "data": pos}), 200

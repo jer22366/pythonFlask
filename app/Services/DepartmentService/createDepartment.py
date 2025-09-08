@@ -11,29 +11,30 @@ def create_department_logic():
     # 必填欄位檢查
     name = data.get("name")
     if not name:
-        return jsonify({"error": "name 欄位必填"}), 400
+        return jsonify({"status": "error", "message": "name 欄位必填"}), 400
 
     # 唯一性檢查
     if Department.query.filter_by(name=name).first():
-        return jsonify({"error": "部門名稱已存在"}), 400
+        return jsonify({"status": "error", "message": "部門名稱已存在"}), 400
     if data.get("code") and Department.query.filter_by(code=data["code"]).first():
-        return jsonify({"error": "部門代碼已存在"}), 400
+        return jsonify({"status": "error", "message": "部門代碼已存在"}), 400
 
     # 建立部門實例
     department = Department(
         name=name,
         code=data.get("code"),
-        parent_id=data.get("parent_id"),
-        level=data.get("level", 1),
-        manager_id=data.get("manager_id"),
+        parent_id=int(data["parent_id"]) if data.get("parent_id") else None,
+        level=int(data.get("level", 1)),
+        manager_id=int(data["manager_id"]) if data.get("manager_id") else None,
         description=data.get("description"),
-        is_active=data.get("is_active", True)
+        is_active=bool(data.get("is_active", True))
     )
 
     db.session.add(department)
     db.session.commit()
 
     return jsonify({
+        "status": "success",
         "message": "部門建立成功",
         "department": {
             "id": department.id,
