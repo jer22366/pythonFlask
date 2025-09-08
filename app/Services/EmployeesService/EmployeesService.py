@@ -14,6 +14,8 @@ def add_employee_logic():
     )
     db.session.add(emp)
     db.session.commit()
+    return jsonify({"message": "Employee added", "id": emp.id}), 201
+    
     
 def list_employees_logic():
     employees = Employee.query.all()

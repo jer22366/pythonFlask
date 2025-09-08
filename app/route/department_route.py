@@ -4,7 +4,7 @@ from app.Services.DepartmentService.getDepartment import get_department_logic
 from app.Services.DepartmentService.getDepartmentById import get_department_by_id_logic
 from app.Services.DepartmentService.updateDepartment import update_department_logic
 from app.Services.DepartmentService.deleteDepartment import delete_department_logic
-organ_bp = Blueprint('department', __name__, url_prefix='/api/department')
+organ_bp = Blueprint('department', __name__, url_prefix='/api/departments')
 
 @organ_bp.route('/create', methods=['POST'])
 def create_department():

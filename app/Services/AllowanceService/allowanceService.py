@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify
 from app import db
-from datetime import datetime
 from app.database.table.employeePayroll.models import Allowance
 
 def add_allowance_logic():

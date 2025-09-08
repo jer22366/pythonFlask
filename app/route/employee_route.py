@@ -1,12 +1,11 @@
 from flask import request, jsonify, Blueprint
 from app.database.table.employeePayroll.models import db, Employee
-from app.Services.employeesService.EmployeesService import (
+from app.Services.EmployeesService.EmployeesService import (
     add_employee_logic, 
     list_employees_logic,
     update_employee_logic,
     delete_employee_logic
 )
-from datetime import datetime
 
 employees_bp = Blueprint('employees', __name__, url_prefix='/api/employees')
 

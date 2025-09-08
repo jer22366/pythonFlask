@@ -9,6 +9,9 @@ from .reportExportLogs_route import report_export_logs_bp
 from .reportSchedules_route import re_schedules_bp
 from .employee_route import employees_bp
 from .payRolls_route import payRolls_bp
+from .allowance_route import allowance_bp
+from .bonuses_route import bonuses_bp
+from .deductions_route import deductions_bp
 
 blueprints = [
     user_bp,
@@ -21,5 +24,8 @@ blueprints = [
     report_export_logs_bp,
     re_schedules_bp,
     payRolls_bp,
-    employees_bp
+    employees_bp,
+    allowance_bp,
+    bonuses_bp,
+    deductions_bp
 ]
